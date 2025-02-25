@@ -21,6 +21,9 @@ def calcular_MST(instancia):
 
     aristas = set()
     
+    # Recorre la matriz generada por "Delaunay(coordenadas)" y almacena en un set todas las aristas
+    # Ya que una arista puede estar presente en mas de 1 triangulo
+    # se utiliza un set para almacenar las aristas sin repetirlas
 
     for simplex in triangulacion.simplices:
         simplex = sorted(simplex)
@@ -38,7 +41,7 @@ def calcular_MST(instancia):
     # np.linalg.norm calcula la norma de un vector, para conocer la distancia entre i y j 
     # se normaliza (i - j) y se usa la funcion de numpy para la norma del vector resultante
 
-    pesos = [np.linalg.norm(coordenadas[i] - coordenadas[j]) for i, j in aristas] * 2
+    pesos = [round(np.linalg.norm(coordenadas[i] - coordenadas[j]), 2) for i, j in aristas] * 2
 
     # Crea la matriz dispersa en formato COO (COOrdinate format) en base a las variables columnas, filas y pesos.
     # Matriz dispersa unicamente almacena aristas no nulas, es decir donde el peso de estas
@@ -63,7 +66,7 @@ def calcular_MST(instancia):
     # Pasos posteriores
     mst_coo = mst.tocoo()
 
-    return mst_coo, coordenadas
+    return mst_coo, matriz_dispersa_coo
 
 
 def geo_to_euc(geo_coords):
@@ -89,6 +92,11 @@ def geo_to_euc(geo_coords):
     # Np.radians convierte a radianes todos los angulos de una matriz
     # lambda = latitud en radianes
     # phi = longitud en radianes
+
+    # geo_coords[:, 0] -> 
+    # : toma todas las filas 
+    # 0 toma la primer columna de cada fila (latitud)
+    # 1 toma la segunda columna de cada fila (longitud)
     latitudes = np.radians(geo_coords[:, 0])
     longitudes = np.radians(geo_coords[:, 1])
 
@@ -109,19 +117,26 @@ def geo_to_euc(geo_coords):
     # x = [x1, x2, x3]
     # y = [y1, y2, y3]
     # euc_coords = [[x1, y1], [x2, y2], [x3, y3]]
+
     euc_coords = np.column_stack((x, y))
 
     return euc_coords
 
 if __name__ == "__main__":
-    instancia = "instances/ulysses22.tsp"
-    mst, coordenadas = calcular_MST(instancia)
-    filas = mst.row
-    columnas = mst.col
-    datos = mst.data
+    instancia = "instances/prueba.tsp"
+    mst, grafo = calcular_MST(instancia)
     
-    print(coordenadas)
-    print()
-    print(filas)
-    print(columnas)
-    print(datos)
+    # matriz_adyacencia_densa = mst.toarray()
+
+    print("Grafo")
+    # print(grafo.row)
+    # print(grafo.col)
+    # print(grafo.data)
+    # print()
+    print("MST")
+    # print(mst.row)
+    # print(mst.col)
+    # print(mst.data)
+    # print()
+    # print("MST densa")
+    # print(matriz_adyacencia_densa)
