@@ -44,9 +44,9 @@ def calcular_nodos_impares_MST(instancia):
 
     return nodos_grado_impar, matriz_dispersa_grafo
 
-
+ 
 if __name__ == "__main__":
     instancia = "instances/prueba.tsp"
     nodos_i, grafo = calcular_nodos_impares_MST(instancia)
-    # print(nodos_i)
-    # print(grafo)
+    print(nodos_i)
+    print(grafo)

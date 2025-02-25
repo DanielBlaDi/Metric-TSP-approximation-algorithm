@@ -66,7 +66,7 @@ def calcular_MST(instancia):
     # Pasos posteriores
     mst_coo = mst.tocoo()
 
-    return mst_coo, matriz_dispersa_coo
+    return mst_coo, matriz_dispersa_coo,coordenadas
 
 
 def geo_to_euc(geo_coords):
