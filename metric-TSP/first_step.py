@@ -6,8 +6,7 @@ from scipy.sparse.csgraph import minimum_spanning_tree
 import load
 
 def calcular_MST(instancia):
-    coordenadas = load.cargar_coordenadas_tsp(instancia)[0]
-    tipo = load.cargar_coordenadas_tsp(instancia)[1] # Tipo se usaria para instancias Geo que requieren un caculo especial de distancias
+    coordenadas,tipo = load.cargar_coordenadas_tsp(instancia) # Tipo se usaria para instancias Geo que requieren un caculo especial de distancias
     numero_coordenadas = coordenadas.shape[0] # Shape retorna una tupla (# filas, # columnas) de un array de numpy
     
     if tipo == "GEO":
@@ -16,22 +15,24 @@ def calcular_MST(instancia):
     # Calcula la triangulacion de Delaunay sobre la lista de coordenadas, retorna una matriz donde cada fila
     # contiene 3 datos que hacen referencia a los indices de las coordenadas que conforman los triangulos
     # ej: [[coord1, coord2, coord3], [coord1, coord2, coord4]]
+    if numero_coordenadas>=3:
+        triangulacion = Delaunay(coordenadas) 
 
-    triangulacion = Delaunay(coordenadas) 
+        aristas = set()
+        
+        # Recorre la matriz generada por "Delaunay(coordenadas)" y almacena en un set todas las aristas
+        # Ya que una arista puede estar presente en mas de 1 triangulo
+        # se utiliza un set para almacenar las aristas sin repetirlas
 
-    aristas = set()
-    
-    # Recorre la matriz generada por "Delaunay(coordenadas)" y almacena en un set todas las aristas
-    # Ya que una arista puede estar presente en mas de 1 triangulo
-    # se utiliza un set para almacenar las aristas sin repetirlas
-
-    for simplex in triangulacion.simplices:
-        simplex = sorted(simplex)
-        aristas.add((simplex[0], simplex[1]))
-        aristas.add((simplex[1], simplex[2]))
-        aristas.add((simplex[0], simplex[2]))
-    aristas = list(aristas)
-
+        for simplex in triangulacion.simplices:
+            simplex = sorted(simplex)
+            aristas.add((simplex[0], simplex[1]))
+            aristas.add((simplex[1], simplex[2]))
+            aristas.add((simplex[0], simplex[2]))
+        aristas = list(aristas)
+    else:
+        # Forzar aristas para grafos pequeños (ej: 4 nodos)
+        aristas = [(i, j) for i in range(numero_coordenadas) for j in range(i+1, numero_coordenadas)]
     filas = [i for i, j in aristas] + [j for i, j in aristas]  # Filas (i_n, j_m) (al ser un grafo no dirigido (i_n, j_n) = (j_m, i_m))
     columnas = [j for i, j in aristas] + [i for i, j in aristas]  # Columnas (j_n, i_m) (al ser un grafo no dirigido (i_n, j_n) = (j_m, i_m))
 
@@ -124,9 +125,9 @@ def geo_to_euc(geo_coords):
 
 if __name__ == "__main__":
     instancia = "instances/prueba.tsp"
-    mst, grafo = calcular_MST(instancia)
+    mst, grafo, _ = calcular_MST(instancia)
     
-    # matriz_adyacencia_densa = mst.toarray()
+    matriz_adyacencia_densa = mst.toarray()
 
     print("Grafo")
     # print(grafo.row)
