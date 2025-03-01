@@ -40,21 +40,6 @@ def encontrar_circuito_euleriano(H):
 
     return circuito
 
-def aplicar_shortcutting(circuito):
-    """
-    Aplica el shortcutting al circuito Euleriano para obtener un ciclo Hamiltoniano.
-    """
-    visitados = set()
-    ciclo_hamiltoniano = []
-    for nodo in circuito:
-        if nodo not in visitados:
-            ciclo_hamiltoniano.append(nodo)
-            visitados.add(nodo)
-    # Cerrar el ciclo añadiendo el primer nodo al final
-    if ciclo_hamiltoniano:
-        ciclo_hamiltoniano.append(ciclo_hamiltoniano[0])
-    return ciclo_hamiltoniano
-
 if __name__ == "__main__":
     # ...
     instancia = "instances/pla85900.tsp"
@@ -69,11 +54,8 @@ if __name__ == "__main__":
 
         # Generar circuito Euleriano
         circuito = encontrar_circuito_euleriano(H)
-
-        # Aplicar shortcutting para obtener el ciclo Hamiltoniano
-        ciclo_hamiltoniano = aplicar_shortcutting(circuito)
-        print("\nCiclo Hamiltoniano después del shortcutting:")
-        print(" -> ".join(map(str, ciclo_hamiltoniano)))
+        print("\nCiclo Eureliano:")
+        print(" -> ".join(map(str, circuito)))
 
     except Exception as e:
         print(f"Error: {str(e)}")
