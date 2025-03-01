@@ -3,7 +3,7 @@ Here is the space where we are gonna try to create a scirpt that can solve some 
 
 ## How to run
 
-By default, it solves the pla85900.tsp problem, you can change it by modifying the variable `instacia` in the step you want to run (sixth for solution), for some of the instaces of the problem in the `instances/` directory.
+By default, it solves the pla85900.tsp problem, you can change it by modifying the variable `instacia` in the step you want to run (sixth for solution), for one of the instaces of the problem in the `instances/` directory.
 
 ### With poetry
 
