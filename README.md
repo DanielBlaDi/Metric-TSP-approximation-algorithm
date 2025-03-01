@@ -3,8 +3,6 @@ Here is the space where we are gonna try to create a scirpt that can solve some 
 
 ## How to run
 
-By default, it solves the pla85900.tsp problem, you can change it by modifying the variable `instacia` in the step you want to run (sixth for solution), for one of the instaces of the problem in the `instances/` directory.
-
 ### With poetry
 
 Obviusly `poetry` must be [installed](https://python-poetry.org/docs/#installation),  install dependencies using:
@@ -15,7 +13,10 @@ $ poetry install
 
 Then, run it using:
 ```shell
-$ poetry run python metric-TSP/sixth_step.py
+$ poetry run python metric-TSP/main.py ./instances/your_instance.tsp
+
+// For pla85900 use:
+$ poetry run python metric-TSP/main.py ./instances/pla85900.tsp
 ```
 
 ### Without poetry
@@ -28,7 +29,14 @@ $ poetry run python metric-TSP/sixth_step.py
 - numpy
 - scipy
 
-Then run it using:
+Then, run it using:
 ```shell
-$ python metric-TSP/sixth_step.py
+$ python metric-TSP/main.py ./instances/your_instance.tsp
+
+// For pla85900 use:
+$ python metric-TSP/main.py ./instances/pla85900.tsp
 ```
+
+## Step by step
+
+You can exexute until x step by running that step.py file, if you want to change the instance edit variable `instancia` in the file.

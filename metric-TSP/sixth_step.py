@@ -41,7 +41,7 @@ if __name__ == "__main__":
 
         # Aplicar shortcutting para obtener el ciclo Hamiltoniano
         ciclo_hamiltoniano = aplicar_shortcutting(circuito)
-        print("\nCiclo Hamiltoniano después del shortcutting:")
+        print("\nSolucion:")
         print(" -> ".join(map(str, ciclo_hamiltoniano)))
 
     except Exception as e:
