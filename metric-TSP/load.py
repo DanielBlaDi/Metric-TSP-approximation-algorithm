@@ -2,6 +2,9 @@ import numpy as np
 import time
 
 def cargar_coordenadas_tsp(ruta_archivo):
+    """
+    Carga las coordenadas de un archivo TSP en formato GEO o EUC_2D.
+    """
     coordenadas = []
     tipo = None
     with open(ruta_archivo, 'r') as archivo:

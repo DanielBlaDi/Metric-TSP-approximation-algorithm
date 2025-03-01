@@ -47,37 +47,7 @@ def combinar_T_y_M(mst_coo, emparejamiento, num_nodos, nodos_impares, coordenada
 
     return H_real
 
-def graficar_multigrafo(H, coordenadas, emparejamiento):
-    """
-    Grafica el multigrafo H diferenciando aristas del MST y emparejamiento.
-    """
-    G = nx.Graph()
-    
-    # Añadir nodos con posiciones
-    for i, (x, y) in enumerate(coordenadas):
-        G.add_node(i, pos=(x, y))
-    
-    # Añadir aristas clasificadas
-    for i, j, peso in zip(H.row, H.col, H.data):
-        if (i, j) in emparejamiento or (j, i) in emparejamiento:
-            tipo = "emparejamiento"
-        else:
-            tipo = "MST"
-        G.add_edge(i, j, weight=peso, tipo=tipo)
-    
-    pos = nx.get_node_attributes(G, 'pos')
-    edge_colors = ['red' if d['tipo'] == 'emparejamiento' else 'black' for u, v, d in G.edges(data=True)]
-    labels = {(u, v): f"{d['weight']:.2f}" for u, v, d in G.edges(data=True)}
 
-    plt.figure(figsize=(12, 8))
-    nx.draw_networkx_nodes(G, pos, node_size=500, node_color='lightblue')
-    nx.draw_networkx_edges(G, pos, edge_color=edge_colors, width=2)
-    nx.draw_networkx_labels(G, pos, font_size=12)
-    nx.draw_networkx_edge_labels(G, pos, edge_labels=labels, font_size=9)
-    
-    plt.title("Multigrafo H: MST (negro) + Emparejamiento Mínimo (rojo)")
-    plt.axis('off')
-    plt.show()
 
 if __name__ == "__main__":
     instancia = "instances/ulysses22.tsp"
@@ -89,7 +59,6 @@ if __name__ == "__main__":
     try:
         H = combinar_T_y_M(mst_coo, emparejamiento, num_nodos, nodos_impares, coordenadas)
         print("Multigrafo H creado exitosamente")
-        graficar_multigrafo(H, coordenadas, emparejamiento)
         
     except Exception as e:
         print(f"Error: {str(e)}")

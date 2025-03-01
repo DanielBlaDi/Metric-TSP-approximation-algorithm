@@ -27,7 +27,7 @@ def aplicar_shortcutting(circuito):
     return ciclo_hamiltoniano
 
 if __name__ == "__main__":
-    instancia = "instances/pla85900.tsp"
+    instancia = "instances/ulysses22.tsp"
     mst_coo, _, coordenadas = calcular_MST(instancia)
     emparejamiento, _ = encontrar_emparejamiento_minimo(instancia)
     nodos_impares, _ = calcular_nodos_impares_MST(instancia)

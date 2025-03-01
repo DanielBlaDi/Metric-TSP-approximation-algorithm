@@ -1,7 +1,6 @@
 # Añadir este código en fourth_step.py
 import numpy as np
 from fourth_step import combinar_T_y_M
-from fourth_step import graficar_multigrafo
 from third_step import encontrar_emparejamiento_minimo
 from second_step import calcular_nodos_impares_MST
 from first_step import calcular_MST
@@ -42,7 +41,7 @@ def encontrar_circuito_euleriano(H):
 
 if __name__ == "__main__":
     # ...
-    instancia = "instances/pla85900.tsp"
+    instancia = "instances/ulysses22.tsp"
     mst_coo, _, coordenadas = calcular_MST(instancia)
     emparejamiento, _ = encontrar_emparejamiento_minimo(instancia)
     nodos_impares, _ = calcular_nodos_impares_MST(instancia)

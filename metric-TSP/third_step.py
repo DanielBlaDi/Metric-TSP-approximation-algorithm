@@ -5,6 +5,9 @@ from second_step import calcular_nodos_impares_MST
 from first_step import calcular_MST
 
 def encontrar_emparejamiento_minimo(instancia):
+    """
+    encuentra el emparejamiento minimo de nodos impares
+    """
     # Obtener MST y coordenadas
     mst_coo, _, coordenadas = calcular_MST(instancia)
     

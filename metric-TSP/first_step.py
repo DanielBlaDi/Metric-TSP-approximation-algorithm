@@ -6,6 +6,9 @@ from scipy.sparse.csgraph import minimum_spanning_tree
 import load
 
 def calcular_MST(instancia):
+    """
+    calcula el arbol de expansion minima de una instancia
+    """
     coordenadas,tipo = load.cargar_coordenadas_tsp(instancia) # Tipo se usaria para instancias Geo que requieren un caculo especial de distancias
     numero_coordenadas = coordenadas.shape[0] # Shape retorna una tupla (# filas, # columnas) de un array de numpy
     

@@ -2,6 +2,9 @@ import numpy as np
 from scipy.sparse import coo_matrix
 from first_step import calcular_MST
 def calcular_nodos_impares_MST(instancia):
+    """
+    calculas los nodos de grado impar del MST
+    """
     calculo_MST = calcular_MST(instancia)
     mst:coo_matrix = calculo_MST[0]
     matriz_dispersa_grafo:coo_matrix = calculo_MST[1]
