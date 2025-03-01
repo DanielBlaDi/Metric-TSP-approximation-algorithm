@@ -8,19 +8,25 @@ def aplicar_shortcutting(circuito):
     """
     Aplica el shortcutting al circuito Euleriano para obtener un ciclo Hamiltoniano.
     """
+
+    # Usamos un set, que nos permite almacenar valores unicos en este caso el nodo.
     visitados = set()
+
+    # Lista que almacena en orden el circuito.
     ciclo_hamiltoniano = []
+
+    # Si el nodo existe en el set lo omitimos, asegurando que cada nodo se recorre una unica vez.
     for nodo in circuito:
         if nodo not in visitados:
             ciclo_hamiltoniano.append(nodo)
             visitados.add(nodo)
+
     # Cerrar el ciclo añadiendo el primer nodo al final
     if ciclo_hamiltoniano:
         ciclo_hamiltoniano.append(ciclo_hamiltoniano[0])
     return ciclo_hamiltoniano
 
 if __name__ == "__main__":
-    # ...
     instancia = "instances/pla85900.tsp"
     mst_coo, _, coordenadas = calcular_MST(instancia)
     emparejamiento, _ = encontrar_emparejamiento_minimo(instancia)
