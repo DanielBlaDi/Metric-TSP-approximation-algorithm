@@ -17,14 +17,14 @@ def encontrar_circuito_euleriano(H):
     edges = list(zip(H.row, H.col, H.data))
     for u, v, w in edges:
         adj[u].append(v)
-    
+
     # Verificar que el grafo sea conexo (asumimos que H es conexo por construcción)
     circuito = []
     pila = []
     nodo_actual = next(iter(adj.keys()))  # Empezar en un nodo con aristas
-    
+
     pila.append(nodo_actual)
-    
+
     while pila:
         if adj[nodo_actual]:
             siguiente_nodo = adj[nodo_actual].pop()
@@ -34,10 +34,10 @@ def encontrar_circuito_euleriano(H):
         else:
             circuito.append(nodo_actual)
             nodo_actual = pila.pop()
-    
+
     circuito.append(nodo_actual)  # Añadir el último nodo
     circuito.reverse()  # Invertir para obtener el orden correcto
-    
+
     return circuito
 
 if __name__ == "__main__":
@@ -51,11 +51,11 @@ if __name__ == "__main__":
         H = combinar_T_y_M(mst_coo, emparejamiento, num_nodos, nodos_impares, coordenadas)
         print("Multigrafo H creado exitosamente")
         #graficar_multigrafo(H, coordenadas, emparejamiento)
-        
+
         # Generar circuito Euleriano
         circuito = encontrar_circuito_euleriano(H)
-        print("Circuito Euleriano encontrado:")
+        print("\nCiclo Eureliano:")
         print(" -> ".join(map(str, circuito)))
-        
+
     except Exception as e:
         print(f"Error: {str(e)}")
