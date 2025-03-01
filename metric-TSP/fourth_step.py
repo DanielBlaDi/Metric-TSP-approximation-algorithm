@@ -1,7 +1,5 @@
 import numpy as np
 from scipy.sparse import coo_matrix
-import matplotlib.pyplot as plt
-import networkx as nx
 from first_step import calcular_MST
 from third_step import encontrar_emparejamiento_minimo
 from second_step import calcular_nodos_impares_MST
